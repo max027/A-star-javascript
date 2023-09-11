@@ -13,6 +13,12 @@ return Math.abs(x1-x2)+Math.abs(y1-y2)
 
 }
 
+/*
+  * args:x and x
+  * return: none
+  * description:create a constructor for each point
+  *
+*/
 
 function Gridpoint(x,y){
 this.x=x
@@ -23,20 +29,20 @@ this.h=0
 this.neighbors=[]
 this.parent=undefined
 
-this.updateNei=function(grid){
+this.updateNei=function(gridArr,grid){
 let i=this.x
 let j=this.y
 if (i < 20- 1) {
-      this.neighbors.push(grid[i + 1][j]);
+      this.neighbors.push(gridArr[i + 1][j]);
     }
     if (i > 0) {
-      this.neighbors.push(grid[i - 1][j]);
+      this.neighbors.push(gridArr[i - 1][j]);
     }
     if (j < 20- 1) {
-      this.neighbors.push(grid[i][j + 1]);
+      this.neighbors.push(gridArr[i][j + 1]);
     }
     if (j > 0) {
-      this.neighbors.push(grid[i][j - 1]);
+      this.neighbors.push(gridArr[i][j - 1]);
     }
 }
 
@@ -79,6 +85,7 @@ const generateBlocks=(grid)=>{
    
 
   for(let i=0;i<blocks.length;i++){
+    grid.rows[blocks[i][0]].cells[blocks[i][1]].isBlock=true
     grid.rows[blocks[i][0]].cells[blocks[i][1]].bgColor='black'
   }
 }
@@ -95,14 +102,8 @@ let tr=grid.appendChild(document.createElement('tr'))
   for(let y=0;y<20;y++){
     let td=tr.appendChild(document.createElement('td'))
     td.innerHTML=++i
+    td.isBlock=false
 
-/*
-    td.addEventListener('click',(function(cell){
-      return function(){
-        handelClick(cell)
-      }
-    })(td),false )
-*/
   }
 }
 return grid
@@ -114,8 +115,8 @@ return grid
   * description:Entry point of program
 */
 function main() {
-  let start=undefined
-  let end=undefined
+  let start=[0,0]
+  let end=[19,19]
   let gridArr=[]
   let grid=drawGrid()
   // set start and end node
@@ -128,7 +129,7 @@ function main() {
 
   for(let i=0;i<20;i++){
     for(let j=0;j<20;j++){
-      gridArr[i][j]=new Gridpoint(i,j)
+      gridArr[i][j]=new Gridpoint(i,j,grid)
     }
   }
   for(let i=0;i<20;i++){
@@ -137,7 +138,7 @@ function main() {
     }
   }
 
-  console.log(gridArr)
+  console.log(grid)
   generateBlocks(grid)
 
 
