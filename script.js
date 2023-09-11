@@ -26,6 +26,7 @@ this.y=y
 this.f=0
 this.g=0
 this.h=0
+this.block=false
 this.neighbors=[]
 this.parent=undefined
 
@@ -33,18 +34,36 @@ this.updateNei=function(gridArr,grid){
 let i=this.x
 let j=this.y
 if (i < 20- 1) {
+     
       this.neighbors.push(gridArr[i + 1][j]);
+      if(grid.rows[i+1].cells[j].isBlock){
+        this.block=true
+      }
     }
+
     if (i > 0) {
+      if(grid.rows[i-1].cells[j].isBlock){
+        this.block=true
+      }
       this.neighbors.push(gridArr[i - 1][j]);
     }
+
     if (j < 20- 1) {
+      if(grid.rows[i].cells[j+1].isBlock){
+        this.block=true
+      }
       this.neighbors.push(gridArr[i][j + 1]);
     }
     if (j > 0) {
+      if(grid.rows[i].cells[j-1].isBlock){
+        this.block=true
+      } 
       this.neighbors.push(gridArr[i][j - 1]);
     }
+
+
 }
+
 
 }
 
@@ -122,6 +141,7 @@ function main() {
   // set start and end node
   grid.childNodes[0].cells[0].bgColor='orange'
   grid.childNodes[19].cells[19].bgColor='green'
+  generateBlocks(grid)
 
   for (let i = 0; i < 20; i++) {
     gridArr[i] = new Array(20);
@@ -134,13 +154,14 @@ function main() {
   }
   for(let i=0;i<20;i++){
     for(let j=0;j<20;j++){
-      gridArr[i][j].updateNei(gridArr)
+      gridArr[i][j].updateNei(gridArr,grid)
     }
   }
 
-  console.log(grid)
-  generateBlocks(grid)
+ //console.log(grid.rows[0].cells[1].isBlock)
+//  console.log(gridArr[0][1].block)
 
+console.log(gridArr)
 
 // console.log(grid.childNodes[0].cells[0])
   document.body.appendChild(grid)
