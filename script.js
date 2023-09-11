@@ -36,28 +36,20 @@ let j=this.y
 if (i < 20- 1) {
      
       this.neighbors.push(gridArr[i + 1][j]);
-      if(grid.rows[i+1].cells[j].isBlock){
-        this.block=true
-      }
+      
     }
 
     if (i > 0) {
-      if(grid.rows[i-1].cells[j].isBlock){
-        this.block=true
-      }
+      
       this.neighbors.push(gridArr[i - 1][j]);
     }
 
     if (j < 20- 1) {
-      if(grid.rows[i].cells[j+1].isBlock){
-        this.block=true
-      }
+      
       this.neighbors.push(gridArr[i][j + 1]);
     }
     if (j > 0) {
-      if(grid.rows[i].cells[j-1].isBlock){
-        this.block=true
-      } 
+      
       this.neighbors.push(gridArr[i][j - 1]);
     }
 
@@ -155,6 +147,14 @@ function main() {
   for(let i=0;i<20;i++){
     for(let j=0;j<20;j++){
       gridArr[i][j].updateNei(gridArr,grid)
+    }
+  }
+
+  for(let i=0;i<20;i++){
+    for(let j=0;j<20;j++){
+      if(grid.rows[i].cells[j].isBlock){
+        gridArr[i][j].block=true
+      }
     }
   }
 
