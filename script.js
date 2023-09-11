@@ -1,7 +1,67 @@
+
+/*
+  * args:point1 and point2
+  * return:distance between two points
+  * description:calculates Manhattan Distance
+  *
+*/
+const Distance=(point1,point2)=>{
+[x1,y1]=point1
+[x2,y2]=point2
+
+return Math.abs(x1-x2)+Math.abs(y1-y2)
+
+}
+
+
+function Gridpoint(x,y){
+this.x=x
+this.y=y
+this.f=0
+this.g=0
+this.h=0
+this.neighbors=[]
+this.parent=undefined
+
+this.updateNei=function(grid){
+let i=this.x
+let j=this.y
+if (i < 20- 1) {
+      this.neighbors.push(grid[i + 1][j]);
+    }
+    if (i > 0) {
+      this.neighbors.push(grid[i - 1][j]);
+    }
+    if (j < 20- 1) {
+      this.neighbors.push(grid[i][j + 1]);
+    }
+    if (j > 0) {
+      this.neighbors.push(grid[i][j - 1]);
+    }
+}
+
+}
+
+/*
+  * args: grid
+  * return:
+  * description: run A* algorithm
+  *
+*/
+const Algorithm=(grid)=>{
+let open_set=[]
+let close_set=[]
+let g_score=[]
+
+
+}
+
+
 /*
   * args:none
   * return:none
   * description:generates blocks for pathfinding algo
+  *
 */
  
 const generateBlocks=(grid)=>{
@@ -22,16 +82,6 @@ const generateBlocks=(grid)=>{
     grid.rows[blocks[i][0]].cells[blocks[i][1]].bgColor='black'
   }
 }
-
-
-/*args:none
-*return:none
-*description:handels clicks
-*/
-const handelClick=(cell)=>{
-  console.log(cell)
-}
-
 /* args:none
 * return:grid(tabel)
 * description:drawGrid
@@ -66,12 +116,31 @@ return grid
 function main() {
   let start=undefined
   let end=undefined
+  let gridArr=[]
   let grid=drawGrid()
   // set start and end node
   grid.childNodes[0].cells[0].bgColor='orange'
   grid.childNodes[19].cells[19].bgColor='green'
 
+  for (let i = 0; i < 20; i++) {
+    gridArr[i] = new Array(20);
+  }
+
+  for(let i=0;i<20;i++){
+    for(let j=0;j<20;j++){
+      gridArr[i][j]=new Gridpoint(i,j)
+    }
+  }
+  for(let i=0;i<20;i++){
+    for(let j=0;j<20;j++){
+      gridArr[i][j].updateNei(gridArr)
+    }
+  }
+
+  console.log(gridArr)
   generateBlocks(grid)
+
+
 // console.log(grid.childNodes[0].cells[0])
   document.body.appendChild(grid)
 
