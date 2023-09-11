@@ -65,11 +65,27 @@ if (i < 20- 1) {
   * description: run A* algorithm
   *
 */
-const Algorithm=(grid)=>{
+const Algorithm=(gridArr,grid)=>{
 let open_set=[]
 let close_set=[]
 let g_score=[]
+let path=[]
+let start=gridArr[0][0]
+let end=gridArr[19][19]
 
+open_set.push(start)
+
+while(open_set.length>0){
+let lowidx=0
+
+  for(let i=0;i<open_set.length;i++){
+    if(open_set[i].f<open_set[lowidx].f){
+      lowidx=i
+    }
+  }
+
+
+}
 
 }
 
@@ -163,6 +179,7 @@ function main() {
 
 console.log(gridArr)
 
+//Algorithm(gridArr,grid)
 // console.log(grid.childNodes[0].cells[0])
   document.body.appendChild(grid)
 
