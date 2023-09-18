@@ -145,7 +145,7 @@ let current=open_set[lowidx]
  
 const generateBlocks=(grid)=>{
   let blocks=[]
-  while(blocks.length<150){
+  while(blocks.length<100){
     const num1=Math.floor(Math.random()*19-1)+1;
     const num2=Math.floor(Math.random()*19-1)+1;
     if((num1==0&&num2==0)||(num1==19&&num2==19)){
@@ -221,12 +221,16 @@ function main() {
 
 
 let path=Algorithm(gridArr)
-  for(let i=0;i<path.length;i++){
-    x=path[i].x
-    y=path[i].y
-    grid.rows[x].cells[y].bgColor="pink"
+  if(path.length==0){
+    document.getElementById("text1").style.visibility='visible'
+  }else{
+    for(let i=1;i<path.length-1;i++){
+      x=path[i].x
+      y=path[i].y
+      grid.rows[x].cells[y].bgColor="pink"
+    }
+    
   }
-
   document.body.appendChild(grid)
 
 }
