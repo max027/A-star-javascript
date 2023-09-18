@@ -96,8 +96,6 @@ let current=open_set[lowidx]
       temp=temp.parent
     }
 
-    console.log('done')
-
     return path.reverse()
   }
 
@@ -116,7 +114,7 @@ let current=open_set[lowidx]
     if(!close_set.includes(neigh)){
       let possG=neigh.g+1
 
-      if(!open_set.includes(neigh)){
+      if(!open_set.includes(neigh)&&!neigh.block){
         open_set.push(neigh)
       }else if(possG>=neigh.g){
         continue
@@ -176,7 +174,6 @@ for(let x=0;x<20;x++){
 let tr=grid.appendChild(document.createElement('tr'))
   for(let y=0;y<20;y++){
     let td=tr.appendChild(document.createElement('td'))
-    td.innerHTML=++i
     td.isBlock=false
 
   }
@@ -229,12 +226,7 @@ let path=Algorithm(gridArr)
     y=path[i].y
     grid.rows[x].cells[y].bgColor="pink"
   }
-  console.log(path)
- //console.log(grid.rows[0].cells[1].isBlock)
-//  console.log(gridArr[0][1].block)
 
-//Algorithm(gridArr,grid)
-// console.log(grid.childNodes[0].cells[0])
   document.body.appendChild(grid)
 
 }
