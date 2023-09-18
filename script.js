@@ -30,7 +30,7 @@ this.block=false
 this.neighbors=[]
 this.parent=undefined
 
-this.updateNei=function(gridArr,grid){
+this.updateNei=function(gridArr){
 let i=this.x
 let j=this.y
 if (i < 20- 1) {
@@ -84,7 +84,16 @@ let lowidx=0
     }
   }
 
+let current=open_set[lowidx]
 
+  if(current===end){
+    let temp=current
+    path.push(temp)
+    while(temp.parent){
+      path.push(temp.parent)
+      temp=temp.parent
+    }
+  }
 }
 
 }
