@@ -9,7 +9,7 @@ const Distance=(point1,point2)=>{
 [x1,y1]=point1
 x2=point2[0]
 y2=point2[1]
-
+//[x2,y2]=point2
 return Math.abs(x1-x2)+Math.abs(y1-y2)
 
 
@@ -67,10 +67,9 @@ if (i < 20- 1) {
   * description: run A* algorithm
   *
 */
-const Algorithm=(gridArr,grid)=>{
+const Algorithm=(gridArr)=>{
 let open_set=[]
 let close_set=[]
-let g_score=[]
 let path=[]
 let start=gridArr[0][0]
 let end=gridArr[19][19]
