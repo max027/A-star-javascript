@@ -7,9 +7,11 @@
 */
 const Distance=(point1,point2)=>{
 [x1,y1]=point1
-[x2,y2]=point2
+x2=point2[0]
+y2=point2[1]
 
 return Math.abs(x1-x2)+Math.abs(y1-y2)
+
 
 }
 
@@ -93,8 +95,45 @@ let current=open_set[lowidx]
       path.push(temp.parent)
       temp=temp.parent
     }
+
+    console.log('done')
+
+    return path.reverse()
   }
-}
+
+
+  //remove current from open set
+  open_set.splice(lowidx,1)
+
+  close_set.push(current)
+
+  
+  let neighbour=current.neighbors
+
+  for(let i=0;i<neighbour.length;i++){
+   let neigh=neighbour[i] 
+
+    if(!close_set.includes(neigh)){
+      let possG=neigh.g+1
+
+      if(!open_set.includes(neigh)){
+        open_set.push(neigh)
+      }else if(possG>=neigh.g){
+        continue
+      }
+      neigh.g=possG
+      neigh.h=Distance([neigh.x,neigh.y],[end.x,end.y])
+      neigh.f=neigh.g+neigh.h
+
+      neigh.parent=current
+    
+    }
+
+  }
+
+  }
+
+  return []
 
 }
 
@@ -183,10 +222,16 @@ function main() {
     }
   }
 
+
+let path=Algorithm(gridArr)
+  for(let i=0;i<path.length;i++){
+    x=path[i].x
+    y=path[i].y
+    grid.rows[x].cells[y].bgColor="pink"
+  }
+  console.log(path)
  //console.log(grid.rows[0].cells[1].isBlock)
 //  console.log(gridArr[0][1].block)
-
-console.log(gridArr)
 
 //Algorithm(gridArr,grid)
 // console.log(grid.childNodes[0].cells[0])
