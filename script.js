@@ -187,8 +187,8 @@ return grid
   * description:Entry point of program
 */
 function main() {
-  let start=[0,0]
-  let end=[19,19]
+  const start=document.getElementById('start')
+  const clear=document.getElementById('clear')
   let gridArr=[]
   let grid=drawGrid()
   // set start and end node
@@ -219,18 +219,25 @@ function main() {
     }
   }
 
+  let path=null
+  start.addEventListener("click",()=>{
+    path=Algorithm(gridArr)
+      if(path.length==0){
+        document.getElementById("text1").style.visibility='visible'
+      }else{
+        for(let i=1;i<path.length-1;i++){
+          x=path[i].x
+          y=path[i].y
+          grid.rows[x].cells[y].bgColor="pink"
+        }
+        
+      }
+  })
 
-let path=Algorithm(gridArr)
-  if(path.length==0){
-    document.getElementById("text1").style.visibility='visible'
-  }else{
-    for(let i=1;i<path.length-1;i++){
-      x=path[i].x
-      y=path[i].y
-      grid.rows[x].cells[y].bgColor="pink"
-    }
-    
-  }
+  clear.addEventListener("click",()=>{
+   return window.location.reload()
+  })
+
   document.body.appendChild(grid)
 
 }

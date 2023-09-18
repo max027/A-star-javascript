@@ -15,13 +15,28 @@
     background-color:yellow;
     font-weight:bold; color:red;
 }
-.wrapper{
-  width: 100vw;
+.main{
+  box-sizing: border-box;
   display: flex;
   align-items: center;
-  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+.wrapper2{
+  box-sizing: border-box;
+  margin-left: 24px;
 }
 #text1{
   visibility:hidden;
   color: red;
+}
+.btn{
+  color: white;
+  width: 100px;
+  height: 40px;
+  background-color: green;
+  border: none;
+}
+.btn2{
+  background-color: red;
 }
