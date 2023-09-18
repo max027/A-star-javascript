@@ -6,10 +6,8 @@
   *
 */
 const Distance=(point1,point2)=>{
-[x1,y1]=point1
-x2=point2[0]
-y2=point2[1]
-//[x2,y2]=point2
+const [x1,y1]=point1
+const [x2,y2]=point2
 return Math.abs(x1-x2)+Math.abs(y1-y2)
 
 
